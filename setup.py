@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name="signpdf",
-    version="0.0.1",
+    version="0.0.2",
     author="Charlie DeTar",
     author_email="cfd@media.mit.edu",
     url="https://github.com/yourcelf/signpdf",
@@ -16,6 +16,7 @@ setup(
     py_modules=['signpdf'],
     entry_points={'console_scripts': ['signpdf = signpdf:main']},
     install_requires=['reportlab', 'pypdf2'],
+    include_package_data=True
 )
 
 
