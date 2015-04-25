@@ -1,0 +1,5 @@
+venv
+*.pyc
+dist
+signpdf.egg-info
+publish.sh
