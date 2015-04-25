@@ -15,7 +15,7 @@ parser.add_argument("--date", action='store_true')
 parser.add_argument("--output", nargs='?',
         help="Output file. Defaults to input filename plus '_signed'")
 parser.add_argument("--coords", nargs='?', default='2x100x100x125x40',
-        help="Coordinates to place signature. Format: PAGExXxYxWIDTHxHEIGHT.  1x200x300x125x40 means page 1, 200 units horizontally from the bottom left, 300 units vertically from the bottom left. Pages count starts at 1 (1-based indexing).  Units are pdf-standard units (1/72 inch).")
+        help="Coordinates to place signature. Format: PAGExXxYxWIDTHxHEIGHT.  1x200x300x125x40 means page 1, 200 units horizontally from the bottom left, 300 units vertically from the bottom left, 125 units wide, 40 units tall. Pages count starts at 1 (1-based indexing).  Units are pdf-standard units (1/72 inch).")
 
 def _get_tmp_filename(suffix=".pdf"):
     with tempfile.NamedTemporaryFile(suffix=".pdf") as fh:

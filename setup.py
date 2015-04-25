@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name="signpdf",
-    version="0.0.2",
+    version="0.0.3",
     author="Charlie DeTar",
     author_email="cfd@media.mit.edu",
     url="https://github.com/yourcelf/signpdf",
