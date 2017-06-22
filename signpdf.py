@@ -59,7 +59,7 @@ def sign_pdf(args):
 
         writer.addPage(page)
 
-    with open(output_filename, 'w') as fh:
+    with open(output_filename, 'wb') as fh:
         writer.write(fh)
 
     for handle in [pdf_fh, sig_tmp_fh]:
