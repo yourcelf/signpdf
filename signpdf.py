@@ -44,7 +44,7 @@ def sign_pdf(args):
             # Create PDF for signature
             sig_tmp_filename = _get_tmp_filename()
             c = canvas.Canvas(sig_tmp_filename, pagesize=page.cropBox)
-            c.drawImage(args.signature, x1, y1, width, height)
+            c.drawImage(args.signature, x1, y1, width, height, mask='auto')
             if args.date:
                 c.drawString(x1 + width, y1, datetime.datetime.now().strftime("%Y-%m-%d"))
             c.showPage()
