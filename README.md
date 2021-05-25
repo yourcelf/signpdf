@@ -14,14 +14,14 @@ Cons: no gui yet.
 Info
 ====
 
-the current repo is not updated on pypi
+The current repo is not updated on PyPi
 
 Installation
 ------------
 
 Install with pip:
 
-    pip install git+https://github.com/Agent-Hellboy/signpdf.git
+    pip3 install git+https://github.com/yourcelf/signpdf.git
 
 Or from git:
 
