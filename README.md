@@ -21,7 +21,7 @@ Installation
 
 Install with pip:
 
-    pip3 install git+https://github.com/yourcelf/signpdf.git
+    pip install git+https://github.com/yourcelf/signpdf.git
 
 Or from git:
 
