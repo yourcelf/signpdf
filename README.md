@@ -10,12 +10,18 @@ images like some alternatives).
 
 Cons: no gui yet.
 
+
+Info
+====
+
+the current repo is not updated on pypi
+
 Installation
 ------------
 
 Install with pip:
 
-    pip install signpdf
+    pip install git+https://github.com/Agent-Hellboy/signpdf.git
 
 Or from git:
 
