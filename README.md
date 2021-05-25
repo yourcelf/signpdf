@@ -10,12 +10,18 @@ images like some alternatives).
 
 Cons: no gui yet.
 
+
+Info
+====
+
+The current repo is not updated on PyPi
+
 Installation
 ------------
 
 Install with pip:
 
-    pip install signpdf
+    pip install git+https://github.com/yourcelf/signpdf.git
 
 Or from git:
 
