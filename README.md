@@ -31,6 +31,7 @@ Usage
 Sign the first page of "contract.pdf" with the signature "sig.png":
 
     signpdf contract.pdf sig.png --coords 1x100x100x150x40
+    signpdf contract.pdf sig.png --coords '1x100x100x150x40' [For Linux]
 
 Coordinates format is:  ``<pagenum>x<x-coord>x<y-coord>x<width>x<height>``.
  - ``<pagenum>`` the page number, count starts at 1.
