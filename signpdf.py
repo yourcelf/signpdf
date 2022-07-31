@@ -7,7 +7,8 @@ import tempfile
 import PyPDF2
 import datetime
 from reportlab.pdfgen import canvas
-from PIL import Image
+# future: to support decrypting sigature file
+#from PIL import Image
 
 
 # for gui clicking
