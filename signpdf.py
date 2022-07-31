@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import os
 import time
@@ -106,7 +106,10 @@ def get_locations(args,sig_page):
 
     plt.setp(plt.gca(), autoscale_on=False)
 
-    tellme('Please click locations of signature and date ... then close the preview.')
+    if args.date:
+        tellme('Please click locations of signature and date ... then close the preview.')
+    else:        
+        tellme('Please click location of signature ... then close the preview.')
 
 
     #plt.waitforbuttonpress()
@@ -119,6 +122,7 @@ def get_locations(args,sig_page):
     pts = x[0]
     plt.text(pts[0],pts[1],'x',color='b')
 
+    ptd = None
     if args.date:
         ptd = x[1]
         plt.text(ptd[0],ptd[1],'x',color='g')
@@ -129,10 +133,13 @@ def get_locations(args,sig_page):
     #print('You clicked (a): ', pt)
     # get int typed PDF coordinates of sig and date
     pdf_pt_s = co_xform(pts)
-    pdf_pt_d = co_xform(ptd) 
+    pdf_pt_d = None
+    if ptd is not None:
+        pdf_pt_d = co_xform(ptd) 
     
     print('Sig  location:  {:}'.format(pdf_pt_s))
-    print('Date location:  {:}'.format(pdf_pt_d))
+    if ptd is not None:
+        print('Date location:  {:}'.format(pdf_pt_d))
      
     # cleanup
     os.system('rm {:}'.format(uniquetmpName+'.png'))
@@ -196,7 +203,8 @@ def sign_pdf(args):
             locs = get_locations(args,page)
             (x1,y1) = locs[0]  # sig location
             y1 -= sig_descender_offset()
-            (x2,y2) = locs[1]  # date location
+            if args.date:
+                (x2,y2) = locs[1]  # date location
             
             c = canvas.Canvas(sig_tmp_filename, pagesize=page.cropBox)
             [width , height] = dims
