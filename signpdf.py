@@ -18,18 +18,19 @@ import numpy as np
 
 import time
  
+YOUR_FAV_SIGNATURE_IMAGE = '/home/blake/xxxxxxxxxxxx'
 
-parser = argparse.ArgumentParser("Add signatures to PDF files")
+parser = argparse.ArgumentParser(">signpdf.py")
 # future - store encrypted signature image
 #parser.add_argument('key', help='key to decript your signature file')
 parser.add_argument("pdf", help="The pdf file to annotate")
 # signature is now optional- a default is available
-parser.add_argument("signature", nargs='?', help="(optional)The signature file (png, jpg)")
-parser.add_argument("--date", action='store_true')
+parser.add_argument("signature", nargs='?', 
+        help="(optional)The signature file (png, jpg)")
+parser.add_argument("--date", action='store_true',
+        help='enable clicking a second location for adding signature date.')
 parser.add_argument("--output", nargs='?',
         help="Output file. Defaults to input filename plus '_signed'")
-#parser.add_argument("--coords", nargs='?', default='2x100x100x125x40',
-        #help="Coordinates to place signature. Format: PAGExXxYxWIDTHxHEIGHT.  1x200x300x125x40 means page 1, 200 units horizontally from the bottom left, 300 units vertically from the bottom left, 125 units wide, 40 units tall. Pages count starts at 1 (1-based indexing).  Units are pdf-standard units (1/72 inch).")
 parser.add_argument("--pageno", help="Which page to apply the signature (default= 1).")
 
 def tellme(s):
@@ -161,7 +162,7 @@ def get_sig_image(args):
         img_file_path = args.signature
     else:
         ###   easier to use if repeating one sig file
-        img_file_path = '/home/blake/templates/signature.png'
+        img_file_path = YOUR_FAV_SIGNATURE_IMAGE
     dims = sigbox(img_file_path) 
     print('Signature I will use is:', img_file_path, dims)
     return img_file_path, dims

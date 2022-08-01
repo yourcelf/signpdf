@@ -1,4 +1,4 @@
-signpdf
+## signpdf
 =======
 
 A quick script to add signature images to PDFs, because I couldn't find
@@ -6,11 +6,12 @@ anything that worked well for the purpose under Linux.
 
 Pros: should work with most PDFs, and with signatures as PNG's or JPG's.  It
 preserves the incoming PDF's text format (e.g. doesn't convert every page to
-images like some alternatives).
+images like some alternatives).   Just click a preview of the desired page to
+indicate where your signature and date should go. 
 
-Cons: no gui yet.
+Cons: hard coded signature file size
 
-Installation
+### Installation
 ------------
 
 Install with pip:
@@ -25,23 +26,18 @@ Or from git:
     source venv/bin/activate
     pip install -r requirements.txt
 
-Usage
+### Usage
 -----
+```
+signpdf.py [-h] [--date] [--output [OUTPUT]] [--pageno PAGENO] pdf [signature]
 
-Sign the first page of "contract.pdf" with the signature "sig.png":
+positional arguments:
+  pdf                The pdf file to annotate
+  signature          (optional - you can hardcode your sig file) The signature file (png, jpg)
 
-    signpdf contract.pdf sig.png --coords 1x100x100x150x40
-
-Coordinates format is:  ``<pagenum>x<x-coord>x<y-coord>x<width>x<height>``.
- - ``<pagenum>`` the page number, count starts at 1.
- - ``<x-coord>`` horizontal distance from bottom-left corner in PDF units (1/72 inch).
- - ``<y-coord>`` vertical distance from bottom-left corner in PDF units (1/72 inch).
- - ``<width>`` width of signature in PDF units (1/72 inch).
- - ``<height>`` height of signature in PDF units (1/72 inch)
-
-Other options:
-
- - ``--date`` Append a date to the right of the signature.
- - ``--output`` Destination filename.  Default is to append ``_signed`` to the incoming PDF name.
-
-For more usage details, run ``signpdf --help``.
+optional arguments:
+  -h, --help         show this help message and exit
+  --date             enable clicking a second location for adding signature date.
+  --output [OUTPUT]  Output file. Defaults to input filename plus '_signed'
+  --pageno PAGENO    Which page to apply the signature (default= 1).
+ ```
