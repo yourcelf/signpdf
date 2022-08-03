@@ -32,6 +32,7 @@ parser.add_argument("--date", action='store_true',
 parser.add_argument("--output", nargs='?',
         help="Output file. Defaults to input filename plus '_signed'")
 parser.add_argument("--pageno", help="Which page to apply the signature (default= 1).")
+parser.add_argument("--text", action='store_true', help='Add text to the PDF instead of a signature')
 
 def tellme(s):
     print(s)
@@ -47,7 +48,7 @@ pdfdpi = 72.0       # PDF dots per inch
 def co_xform(p1):   # assumes paper = US Letter
     pageheightIn = 11.0
     xfudge = 0
-    yfudge = 0
+    yfudge = 5   # seems better
     x1 = p1[0] + xfudge
     y1 = p1[1] + yfudge
     x2 = int((0.5+x1)*positscale)
@@ -71,7 +72,7 @@ def sig_descender_offset():  # vertical shift to allow descenders below click pt
     desc_in = 0.250*positscale  #inches below sig line (click pt)
     return desc_in * pdfdpi
 
-def get_locations(args,sig_page):
+def get_locations(args,sig_page,sigtext):
     # with thanks to:
     #https://matplotlib.org/3.0.0/_downloads/ginput_manual_clabel_sgskip.py
     #
@@ -108,10 +109,14 @@ def get_locations(args,sig_page):
 
     plt.setp(plt.gca(), autoscale_on=False)
 
+    if args.text:
+        click1target = '"'+sigtext+'"'
+    else:
+        click1target = 'signature'
     if args.date:
-        tellme('Please click locations of signature and date ... then close the preview.')
+        tellme('Please click locations of {:} and date ... then close the preview.'.format(click1target))
     else:        
-        tellme('Please click location of signature ... then close the preview.')
+        tellme('Please click location of {:} ... then close the preview.'.format(click1target))
 
 
     #plt.waitforbuttonpress()
@@ -174,6 +179,7 @@ def _get_tmp_filename(suffix=".pdf"):
 def sign_pdf(args):
     try:
         int(args.pageno)
+        # correct the page number for list index usage
         page_num = int(args.pageno) - 1
     except:
         page_num = 1 -1  # default is page 1
@@ -183,6 +189,14 @@ def sign_pdf(args):
     output_filename = args.output or "{}_signed{}".format(
         *os.path.splitext(args.pdf)
     )
+
+    #
+    #   input the text in text-mode
+    #
+
+    sigtext = None
+    if args.text:
+        sigtext = input('Please enter the desired text:')
 
     pdf_fh = open(args.pdf, 'rb')
     sig_tmp_fh = None
@@ -202,7 +216,7 @@ def sign_pdf(args):
             # Create PDF for signature
             sig_tmp_filename = _get_tmp_filename()
             # get user to click locations
-            locs = get_locations(args,page)
+            locs = get_locations(args,page,sigtext)
             (x1,y1) = locs[0]  # sig location
             y1 -= sig_descender_offset()
             if args.date:
@@ -211,7 +225,10 @@ def sign_pdf(args):
             c = canvas.Canvas(sig_tmp_filename, pagesize=page.cropBox)
             [width , height] = dims
             #c.drawImage(args.signature, x1, y1, width, height, mask='auto')
-            c.drawImage(sig_img_name, x1, y1, width, height, mask='auto')
+            if args.text:  # we are placing text instead of the signature
+                c.drawString(x1,y1+sig_descender_offset(), sigtext)
+            else:
+                c.drawImage(sig_img_name, x1, y1, width, height, mask='auto')
             if args.date:
                 c.drawString(x2,y2, datetime.datetime.now().strftime("%d-%b-%Y"))
             c.showPage()

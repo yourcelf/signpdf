@@ -29,7 +29,7 @@ Or from git:
 ### Usage
 -----
 ```
-signpdf.py [-h] [--date] [--output [OUTPUT]] [--pageno PAGENO] pdf [signature]
+signpdf.py [-h] [--date] [--output [OUTPUT]] [--text] [--pageno PAGENO] pdf [signature]
 
 positional arguments:
   pdf                The pdf file to annotate
@@ -39,5 +39,6 @@ optional arguments:
   -h, --help         show this help message and exit
   --date             enable clicking a second location for adding signature date.
   --output [OUTPUT]  Output file. Defaults to input filename plus '_signed'
+  --text             Instead of signature, you will be propted for text to insert
   --pageno PAGENO    Which page to apply the signature (default= 1).
  ```
