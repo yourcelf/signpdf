@@ -18,7 +18,7 @@ import numpy as np
 
 import time
  
-YOUR_FAV_SIGNATURE_IMAGE = '/home/blake/xxxxxxxxxxxx'
+YOUR_FAV_SIGNATURE_IMAGE = 'PATH TO IMAGE FILE HERE (either png or jpg)'
 
 parser = argparse.ArgumentParser(">signpdf.py")
 # future - store encrypted signature image
@@ -184,6 +184,13 @@ def sign_pdf(args):
     except:
         page_num = 1 -1  # default is page 1
         
+    print('''
+
+
+        Note: click locations are incorrect for LANDSCAPE documents
+
+
+        ''')
     print(' We are going to sign page: ', page_num+1)
 
     output_filename = args.output or "{}_signed{}".format(
