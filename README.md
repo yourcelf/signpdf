@@ -1,11 +1,17 @@
 ## signpdf
 ### This fork:
 Several improvements: 
+
     1) Direct clicking of PDF images
+    
     2) Specify page number on multi-page PDFs
+    
     3) Add today's date to a second clicked location
+    
     4) Add some text to the clicked location instead of signature (example: printed full name)
+    
     5) Renames output file ... `_signed_XX.pdf`  where `XX` are your initials
+    
     6) Save your sig file location and your initials in a config file in your home dir. 
 
 
